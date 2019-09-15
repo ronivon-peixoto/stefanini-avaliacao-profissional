@@ -1,0 +1,49 @@
+<div class="row" *ngIf="infoFuncionario">
+   <div class="col-sm-12">
+      <h1 class="display-4 text-center">Detalhes do Funcionário</h1>
+      <hr>
+   </div>
+   <div class="col-sm-12">
+      <h1>{{ infoFuncionario.funcionario.nome }}</h1>
+      <hr /><br />
+   </div>
+   <div class="col-sm-3">
+      <div class="text-center">
+         <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+         <hr />
+         <button *ngIf="userAuthGerente && infoFuncionario.promover" (click)="promover()" type="button" class="btn btn-success m-1"> Promover </button>
+      </div>
+   </div>
+   <div class="col-sm-5">
+      <p>Código<br /><b>{{ infoFuncionario.funcionario.id }}</b></p>
+      <p>CPF<br /><b>{{ infoFuncionario.funcionario.cpf }}</b></p>
+      <p>Data de Admissao<br /><b>{{ infoFuncionario.funcionario.dataAdmissao | date:'dd/MM/yyyy' }}</b></p>
+      <p>Nível<br /><b>{{ infoFuncionario.funcionario.nivel }}</b></p>
+      <p>Cargo<br /><b>{{ infoFuncionario.funcionario.cargo }}</b></p>
+      <p>Data Promoção<br /><b>{{ (infoFuncionario.funcionario.dataPromocao) ? (infoFuncionario.funcionario.dataPromocao | date:'dd/MM/yyyy') : '---' }}</b></p>
+      <p>Nome do Mentor<br /><b>{{ infoFuncionario.funcionario.nomeMentor }}</b></p>
+      <p>Nome do Gerente<br /><b>{{ infoFuncionario.funcionario.nomeGerente }}</b></p>
+      <p>Centro de Custo<br /><b>{{ infoFuncionario.funcionario.nomeCentroCusto }}</b></p>
+      <p>Endereço do C. Custo<br /><b>{{ infoFuncionario.funcionario.enderecoCentroCusto }}</b></p>
+      <p>Usuário<br /><b>{{ infoFuncionario.funcionario.username }}</b></p>
+      <p>E-mail<br /><b>{{ infoFuncionario.funcionario.email }}</b></p>
+   </div>
+   <div class="col-sm-4">
+      <h5>Histórico de Avaliações:</h5>
+      <div *ngFor="let reg of infoFuncionario.detalhesAvaliacoes" class="alert" [ngClass]="{'alert-success': reg.notaFinal >= 80, 'alert-warning': reg.notaFinal < 80}"  role="alert">
+         <h5 class="alert-heading">Você obteve um total de {{ reg.notaFinal }}% de aproveitamento neste ciclo de avaliações.</h5>
+         <p>{{ reg.dataAprovacao | date: 'dd/MM/yyy' }}</p>
+         <hr>
+         <blockquote class="blockquote text-center">
+            <p class="mb-0" *ngIf="reg.comentariosGerente"><i>"{{ reg.comentariosGerente }}"</i></p>
+            <p class="mb-0" *ngIf="reg.ressalvasGerente">{{ reg.ressalvasGerente }}</p>
+            <footer class="blockquote-footer">Gerente: <cite>{{ reg.nomeGerenteAprovador }}</cite></footer>
+         </blockquote>
+         <hr>
+         <p>{{ reg.nomeMentorAvaliador }} (Mentor)<br />{{ reg.nomeBpAvaliador }} (B.P.)</p>
+      </div>
+      <div class="alert alert-success" *ngIf="!infoFuncionario.detalhesAvaliacoes.length" role="alert">
+         <h5 class="alert-heading">Nenhuma avaliação encontrada!</h5>
+      </div>
+   </div>
+</div>

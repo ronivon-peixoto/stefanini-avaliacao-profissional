@@ -1,0 +1,60 @@
+
+<h2 class="display-4 text-center">Registro</h2>
+<hr>
+
+<div class="row">
+   <div class="col-md-6 offset-md-3">
+      <form *ngIf="signupForm" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      
+         
+         <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name?.errors }" />
+            <div *ngIf="submitted && f.name?.errors" class="invalid-feedback">
+               <div *ngIf="f.name?.errors?.required">Este campo é obrigatório.</div>
+               <div *ngIf="f.name?.errors?.minlength">Informe no mínimo 3 caracteres.</div>
+               <div *ngIf="f.name?.errors?.maxlength">Informe no máximo 50 caracteres.</div>
+            </div>
+         </div>
+
+         <div class="form-group">
+            <label for="username">Usuário</label>
+            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username?.errors }" />
+            <div *ngIf="submitted && f.username?.errors" class="invalid-feedback">
+               <div *ngIf="f.username?.errors?.required">Este campo é obrigatório.</div>
+               <div *ngIf="f.username?.errors?.minlength">Informe no mínimo 3 caracteres.</div>
+               <div *ngIf="f.username?.errors?.maxlength">Informe no máximo 50 caracteres.</div>
+            </div>
+         </div>
+
+         <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email?.errors }" />
+            <div *ngIf="submitted && f.email?.errors" class="invalid-feedback">
+               <div *ngIf="f.email?.errors?.required">Este campo é obrigatório.</div>
+               <div *ngIf="f.email?.errors?.email">Informe um endereço de e-mail válido.</div>
+            </div>
+         </div>
+      
+         <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password?.errors }" />
+            <div *ngIf="submitted && f.password?.errors" class="invalid-feedback">
+               <div *ngIf="f.password?.errors?.required">Este campo é obrigatório.</div>
+               <div *ngIf="f.password?.errors?.minlength">Informe no mínimo 6 caracteres.</div>
+               <div *ngIf="f.password?.errors?.maxlength">Informe no máximo 100 caracteres.</div>
+            </div>
+         </div>
+
+         <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">Enviar</button>
+            <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <hr />
+            <p>Voltar para <a [routerLink]="['../login']">login</a>.</p>
+         </div>
+
+         <div *ngIf="submitted && isSignUpFailed" class="alert alert-warning">Falha no registro!<br/>{{errorMessage}}</div>
+
+      </form>
+   </div>
+</div>
